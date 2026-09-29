@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import '../utils/app_colors.dart';
+import '../utils/app_text_styles.dart';
 
 class CustomPrimaryButton extends StatelessWidget {
   final String text;
@@ -20,16 +22,15 @@ class CustomPrimaryButton extends StatelessWidget {
       height: 52,
       child: ElevatedButton.icon(
         onPressed: onPressed,
-        icon: icon != null ? Icon(icon) : const SizedBox.shrink(),
+        icon: icon != null
+            ? Icon(icon)
+            : const SizedBox.shrink(),
         label: Text(
           text,
-          style: GoogleFonts.poppins(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
+          style: AppTextStyles.button,
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF6C63FF),
+          backgroundColor: AppColors.primary,
           foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(

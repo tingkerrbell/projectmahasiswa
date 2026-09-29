@@ -1,109 +1,108 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../components/custom_buttoon.dart';
 import '../components/custom_app_bar.dart';
+import '../components/custom_buttoon.dart';
 import '../components/profile_avatar.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_text_styles.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
+
+  Widget profileMenu(
+    IconData icon,
+    String title,
+  ) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      decoration: BoxDecoration(
+        color: AppColors.card,
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: ListTile(
+        leading: Icon(
+          icon,
+          color: AppColors.primary,
+        ),
+        title: Text(
+          title,
+          style: AppTextStyles.body.copyWith(
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        trailing: const Icon(
+          Icons.chevron_right,
+          color: AppColors.textGrey,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Profile',
-        subtitle: 'Akun pengguna',
+        subtitle: 'Informasi mahasiswa',
       ),
 
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 15),
 
             const CustomProfileAvatar(
-              imageUrl:
-                  'https://i.pravatar.cc/300',
-              radius: 55,
+              imageUrl: 'https://i.pravatar.cc/300?img=47',
+              radius: 60,
             ),
 
             const SizedBox(height: 16),
 
             Text(
-              'Nida',
-              style: GoogleFonts.poppins(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+              'Layyinnida Indah Ramadhan',
+              textAlign: TextAlign.center,
+              style: AppTextStyles.title,
             ),
 
             Text(
+              '3337240065',
+              style: AppTextStyles.caption,
+            ),
+
+            const SizedBox(height: 28),
+
+            profileMenu(
+              Icons.school_outlined,
+              'Informatika',
+            ),
+
+            profileMenu(
+              Icons.calendar_today_outlined,
+              'Angkatan 2024',
+            ),
+
+            profileMenu(
+              Icons.email_outlined,
               'nida@email.com',
-              style: GoogleFonts.poppins(
-                fontSize: 14,
-                color: Colors.grey,
-              ),
-            ),
-
-            const SizedBox(height: 35),
-
-            profileItem(
-              Icons.person_outline,
-              'Edit Profile',
-            ),
-
-            profileItem(
-              Icons.shopping_bag_outlined,
-              'Pesanan Saya',
-            ),
-
-            profileItem(
-              Icons.settings_outlined,
-              'Pengaturan',
             ),
 
             const Spacer(),
 
             CustomPrimaryButton(
-              text: 'Logout',
-              icon: Icons.logout,
+              text: 'Edit Profile',
+              icon: Icons.edit_outlined,
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('Logout berhasil'),
+                    content: Text(
+                      'Fitur edit profile belum tersedia',
+                    ),
                   ),
                 );
               },
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget profileItem(IconData icon, String title) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: ListTile(
-        leading: Icon(
-          icon,
-          color: const Color(0xFF6C63FF),
-        ),
-        title: Text(
-          title,
-          style: GoogleFonts.poppins(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        trailing: const Icon(
-          Icons.chevron_right,
-          color: Colors.grey,
         ),
       ),
     );

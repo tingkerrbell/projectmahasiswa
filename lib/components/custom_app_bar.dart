@@ -1,5 +1,9 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import '../utils/app_colors.dart';
+import '../utils/app_text_styles.dart';
 
 class CustomAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -26,19 +30,13 @@ class CustomAppBar extends StatelessWidget
         children: [
           Text(
             title,
-            style: GoogleFonts.poppins(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xFF222222),
-            ),
+            style: AppTextStyles.title,
           ),
+
           if (subtitle != null)
             Text(
               subtitle!,
-              style: GoogleFonts.poppins(
-                fontSize: 12,
-                color: Colors.grey,
-              ),
+              style: AppTextStyles.caption,
             ),
         ],
       ),
@@ -46,5 +44,5 @@ class CustomAppBar extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(72);
 }

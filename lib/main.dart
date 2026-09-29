@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'components/bottom_nav.dart';
 import 'screens/home.screen.dart';
 import 'screens/profile_screen.dart';
+import 'utils/app_theme.dart';
 
 void main() {
-  runApp(const TokoNidaApp());
+  runApp(const DataMahasiswaApp());
 }
 
-class TokoNidaApp extends StatelessWidget {
-  const TokoNidaApp({super.key});
+class DataMahasiswaApp extends StatelessWidget {
+  const DataMahasiswaApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Toko Nida',
-      theme: ThemeData(
-        useMaterial3: true,
-        scaffoldBackgroundColor: const Color(0xFFF8F8F8),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF6C63FF),
-        ),
-        textTheme: GoogleFonts.poppinsTextTheme(),
-      ),
+      title: 'Data Mahasiswa',
+      theme: AppTheme.lightTheme,
       home: const MainNavigation(),
     );
   }

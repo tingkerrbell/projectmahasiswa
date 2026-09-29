@@ -1,54 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../components/custom_app_bar.dart';
-import '../components/product_card.dart';
-import '../models/product.dart';
+import '../components/student_card.dart';
+import '../models/mahasiswa.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_text_styles.dart';
 import 'detail_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  static const List<Product> products = [
-    Product(
-      name: 'Hoodie Basic',
-      price: 'Rp149.000',
-      image:
-          'https://images.unsplash.com/photo-1556821840-3a63f95609a7',
-      description:
-          'Hoodie basic dengan bahan nyaman dan cocok digunakan sehari-hari.',
+  static const List<Mahasiswa> mahasiswaList = [
+    Mahasiswa(
+      nim: '3337240065',
+      nama: 'Layyinnida Indah Ramadhan',
+      jurusan: 'Informatika',
+      angkatan: '2024',
+      email: 'nida@email.com',
+      ipk: '3.83',
+      imageUrl: 'https://i.pravatar.cc/150?img=47',
     ),
-    Product(
-      name: 'Sneakers White',
-      price: 'Rp299.000',
-      image:
-          'https://images.unsplash.com/photo-1542291026-7eec264c27ff',
-      description:
-          'Sneakers casual dengan desain simpel yang cocok untuk berbagai outfit.',
+    Mahasiswa(
+      nim: '3337240001',
+      nama: 'Alya Putri',
+      jurusan: 'Informatika',
+      angkatan: '2024',
+      email: 'alya@email.com',
+      ipk: '3.75',
+      imageUrl: 'https://i.pravatar.cc/150?img=32',
     ),
-    Product(
-      name: 'Tote Bag',
-      price: 'Rp79.000',
-      image:
-          'https://images.unsplash.com/photo-1544816155-12df9643f363',
-      description:
-          'Tote bag minimalis yang praktis digunakan untuk aktivitas sehari-hari.',
+    Mahasiswa(
+      nim: '3337240002',
+      nama: 'Raka Pratama',
+      jurusan: 'Sistem Informasi',
+      angkatan: '2024',
+      email: 'raka@email.com',
+      ipk: '3.62',
+      imageUrl: 'https://i.pravatar.cc/150?img=12',
     ),
-    Product(
-      name: 'Watch Classic',
-      price: 'Rp399.000',
-      image:
-          'https://images.unsplash.com/photo-1524805444758-089113d48a6d',
-      description:
-          'Jam tangan dengan desain klasik dan elegan untuk melengkapi penampilan.',
+    Mahasiswa(
+      nim: '3337240003',
+      nama: 'Salsa Amelia',
+      jurusan: 'Informatika',
+      angkatan: '2024',
+      email: 'salsa@email.com',
+      ipk: '3.80',
+      imageUrl: 'https://i.pravatar.cc/150?img=45',
+    ),
+    Mahasiswa(
+      nim: '3337240004',
+      nama: 'Fajar Nugraha',
+      jurusan: 'Teknik Komputer',
+      angkatan: '2024',
+      email: 'fajar@email.com',
+      ipk: '3.55',
+      imageUrl: 'https://i.pravatar.cc/150?img=11',
     ),
   ];
 
-  void openDetail(BuildContext context, Product product) {
+  void openDetail(
+    BuildContext context,
+    Mahasiswa mahasiswa,
+  ) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => DetailScreen(product: product),
+        builder: (context) => DetailScreen(
+          mahasiswa: mahasiswa,
+        ),
       ),
     );
   }
@@ -57,40 +76,55 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
-        title: 'Toko Nida',
-        subtitle: 'Temukan produk favoritmu',
+        title: 'Data Mahasiswa',
+        subtitle: 'Daftar mahasiswa aktif',
       ),
+
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Produk Pilihan',
-              style: GoogleFonts.poppins(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+            // Search
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: AppColors.card,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: TextField(
+                decoration: InputDecoration(
+                  icon: const Icon(
+                    Icons.search,
+                    color: AppColors.primary,
+                  ),
+                  hintText: 'Cari mahasiswa...',
+                  hintStyle: AppTextStyles.caption,
+                  border: InputBorder.none,
+                ),
               ),
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 22),
+
+            Text(
+              'Daftar Mahasiswa',
+              style: AppTextStyles.heading,
+            ),
+
+            const SizedBox(height: 12),
 
             Expanded(
-              child: GridView.builder(
-                itemCount: products.length,
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 14,
-                  mainAxisSpacing: 14,
-                  childAspectRatio: 0.72,
-                ),
+              child: ListView.builder(
+                itemCount: mahasiswaList.length,
                 itemBuilder: (context, index) {
-                  final product = products[index];
+                  final mahasiswa = mahasiswaList[index];
 
-                  return CustomProductCard(
-                    product: product,
-                    onTap: () => openDetail(context, product),
+                  return StudentCard(
+                    mahasiswa: mahasiswa,
+                    onTap: () {
+                      openDetail(context, mahasiswa);
+                    },
                   );
                 },
               ),
